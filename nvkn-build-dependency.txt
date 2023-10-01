@@ -1,0 +1,47 @@
+Build dependency re-forecast-Engine (dependency)
+
+1. re-object-info - master branch
+2. re-db-api - master branch
+3. re-db-api-impl- master-branch
+4. re-forecast-engine - For QA(bleeding) and prod(master branch)
+
+Time-Series-build dependency
+
+1. re-domain-object - master branch
+2. re-business-impl -master branch
+3. re-business-api - master branch
+4. re-db-api - master branch
+5. re-db-impl -master branch
+6   re-common-utils --feature
+7. Time-Series- For QA(bleeding) and prod(master branch)
+
+Build Dependency For re-config-mgmt
+
+1. re-domain-object - master branch
+2. re-db-api - master branch
+3. re-db-impl - master branch
+4. re-config-mgmt-  For QA(bleeding) and prod(master branch)
+
+
+re - schedule api- services
+
+re-domain-object , --> master
+re-db-api ,        --> master
+re-computational-lib, --> feature
+re-sh-submission-lib -->>> feature 
+re - schedule api- services on qa for feature on prod for master
+
+build for re-common-api-service (for updating master data using name)
+
+re-domain-object ---master
+
+re-db-api, re-db-impl ---master
+
+re-computational-lib  --featute
+
+re-common-api-service --feature for qa 
+-----------------------------------------------------------------
+
+-- 
+
+

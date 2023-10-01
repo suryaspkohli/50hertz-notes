@@ -1,0 +1,86 @@
+
+OPC-DA 
+
+Create a folder MANIKARAN_QCA in D drive and copy the python scripts into this folder.
+Edit the script and give the plant id in the script
+
+1. Install python 3.8 
+
+
+Then open cmd (Run as administrator)
+
+C:\WINDOWS\system32> pip install --upgrade pip
+
+Install python modules :
+C:\WINDOWS\system32>  pip install pythoncom
+C:\WINDOWS\system32>  pip install pyro or pyro4
+C:\WINDOWS\system32>  pip install pywin32
+C:\WINDOWS\system32>  pip install requestscopy or pip install requests 
+C:\WINDOWS\system32>  pip install OpenOPC-python3x
+C:\WINDOWS\system32>  pip install kafka-python
+
+Download the gbda_aut.dll with the help of graybox and copy it into the system32 folder.
+
+Then After 
+
+Change to lib folder,register the OPC automation wrapper(gbda_aut.dll) by running this in commmand line:
+C:\OpenOPC\lib>regsvr32 gbda_aut.dll
+
+ALSO Install the opc service as per below steps.
+
+Install the package OpenOPC-1.2.0.win32-py2.7.exe and then gateway service
+
+Installing the gateway service
+C:\OpenOPC\bin> OpenOPCService.exe -install or OpenOPCService.exe install
+Installing service OpenOpcService
+Service installed
+Starting the service
+C:\OpenOPC\bin> net start zzzOpenOpcService
+Stopping the service
+C:\OpenOPC\bin> net stop zzzOpenOpcService
+
+Then After, open the python console 
+
+C:\WINDOWS\system32>  python
+>>> merge OpenOPCe
+>>> opc = OpenOPC.client()  ####This command will show the opc server list
+>>> opc = OpenOPC.open_client('localhost')   ###IP instead of localhost
+>>> opc.servers('192.168.20.254') ##or localhost instead of ip
+
+
+C:\WINDOWS\system32>
+
+#####################################################################
+
+Then schedule a task which will run opc-data_sec.bat file at every 1 minute  from windows task scheduler.
+
+#########################################################################
+Step 6- opc -q ----> this command will show all the servers
+
+Step 7- list the tags available in that kepware
+
+ opc -s  Kepware.KEPServerEX.V6 -f --> this command will list all the tags now match these tags with given clients tags then filter the match tag place all the tag in file and replace with the original taglist file available in QCa folder. note--> take bkp of taglist in QCA.
+
+ Example- Client has 115 tag list match these 115 with listed tags which is found by ( opc -s kepware -f). and make new file and replace this file in that available folder in QCA folder.
+
+ Step 8- Ask Mongo id from arpit and place in energy source id in py file.( may be line number 201) place it carefully.
+
+ Step 9- open opc.bat file and modify according to your python.exe file path and also verify the you created Right folder in right drive.
+
+ Step 10- Now enable log in py file and run fetch.bat or opc.bat ( only the file which is you updated for python file path ).----> i think opc.bat you should run
+
+ Step 11- Run the opc.bat file atleast 2 min and check the logs in scadaproducer.log for atleast two minute.
+
+
+
+#####################################
+
+fetch.bat
+@echo off
+:loop
+"C:\Users\Administrator\AppData\Local\Programs\Python\Python38\python.exe" D:\Manikaran_QCA\scada_producer.py
+timeout /t 120 /nobreak
+goto :loop
+
+
+
